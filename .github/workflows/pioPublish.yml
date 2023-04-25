@@ -29,4 +29,4 @@ jobs:
       - name: Publish library
         env:
           PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
-        run: pio pkg publish
+        run: pio pkg publish --no-interactive
