@@ -21,5 +21,8 @@ jobs:
       - name: Install PlatformIO
         run: pip install -U platformio
 
+      - name: PLATFORMIO_AUTH_TOKEN
+        run: echo $PLATFORMIO_AUTH_TOKEN
+
       - name: Publish library
         run: pio pkg publish
