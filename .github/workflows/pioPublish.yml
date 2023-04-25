@@ -21,11 +21,6 @@ jobs:
       - name: Install PlatformIO
         run: pip install -U platformio
 
-      - name: PLATFORMIO_AUTH_TOKEN
-        env:
-          PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
-        run: echo $PLATFORMIO_AUTH_TOKEN
-
       - name: Publish library
         env:
           PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
