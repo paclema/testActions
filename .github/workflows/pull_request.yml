@@ -8,6 +8,7 @@ on:
 jobs:
   check-version:
     runs-on: ubuntu-latest
+    name: Check new library version
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -33,6 +34,7 @@ jobs:
     if: github.event.pull_request.merged == true
     needs: check-version
     runs-on: ubuntu-latest
+    name: Publish libraryto PlatformIO Registry
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
