@@ -1,0 +1,51 @@
+name: Check new library version and Publish to PlatformIO
+on:
+  pull_request:
+    branches:
+      - master
+    types: [opened, synchronize, closed]
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install PlatformIO
+        run: pip install -U platformio
+
+      - name: Check new version
+        run: ./check_new_version.sh
+        shell: bash
+        continue-on-error: true
+
+      - name: Check if failed
+        if: ${{ failure() }}
+        run: exit 1
+
+  publish:
+    if: github.event.pull_request.merged == true
+    needs: check-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install PlatformIO
+        run: pip install -U platformio
+
+      - name: Publish library
+        env:
+          PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
+        run: pio pkg publish --no-interactive
