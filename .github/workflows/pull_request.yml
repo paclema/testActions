@@ -1,4 +1,4 @@
-name: Check new library version and Publish to PlatformIO
+name: Pull Request CI
 on:
   pull_request:
     branches:
@@ -6,9 +6,10 @@ on:
     types: [opened, synchronize, closed]
 
 jobs:
+
   check-version:
-    runs-on: ubuntu-latest
     name: Check new library version
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -24,17 +25,12 @@ jobs:
       - name: Check new version
         run: ./.github/scripts/check_new_version.sh
         shell: bash
-      #   continue-on-error: ${{ github.event.action == 'closed' }} # Ignore error on closed PR
-
-      # - name: Check if failed
-      #   if: ${{ failure() }}
-      #   run: exit 1
 
   publish:
+    name: Publish library to PlatformIO Registry
     if: github.event.pull_request.merged == true
     needs: check-version
     runs-on: ubuntu-latest
-    name: Publish libraryto PlatformIO Registry
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -51,3 +47,5 @@ jobs:
         env:
           PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
         run: pio pkg publish --no-interactive
+
+      - name: Update Readme badget
