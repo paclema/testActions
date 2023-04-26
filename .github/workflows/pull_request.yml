@@ -1,0 +1,55 @@
+name: Pull Request CI
+on:
+  pull_request:
+    branches:
+      - master
+    types: [opened, synchronize, closed]
+
+jobs:
+
+  check-version:
+    name: Check new library version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install PlatformIO
+        run: pip install -U platformio
+
+      - name: Check new version
+        run: ./.github/scripts/check_new_version.sh
+        shell: bash
+
+  publish:
+    name: Publish library to PlatformIO Registry
+    if: github.event.pull_request.merged == true
+    needs: check-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
+
+      - name: Update Readme badget
+        run: ./.github/scripts/update_readme_lib_version.sh
+        shell: bash
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install PlatformIO
+        run: pip install -U platformio
+
+      - name: Publish library
+        env:
+          PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
+        run: pio pkg publish --no-interactive
