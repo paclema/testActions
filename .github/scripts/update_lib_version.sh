@@ -11,7 +11,7 @@ package_owner=$(echo "${GITHUB_REPOSITORY}" | cut -d / -f 1)
 
 # Update PLatformIO badge in README
 BADGE_REGEX='\[!\[PlatformIO Registry\]\(https:\/\/badges\.registry\.platformio\.org\/packages\/'"${package_owner}"'\/library\/'"${package_name}"'\.svg\?version=[0-9]+\.[0-9]+\.[0-9]+\)\]'
-BADGE_REPLACE='[![PlatformIO Registry](https://badges.registry.platformio.org/packages/'"${package_owner}"'/library/'"${package_name}"'.svg?version='"${current_version}"')]'
+BADGE_REPLACE='[![PlatformIO Registry](https://badges.registry.platformio.org/packages/'"${package_owner}"'/library/'"${package_name}"'.svg?version='"${package_version}"')]'
 sed -i -E "s#${BADGE_REGEX}#${BADGE_REPLACE}#g" README.md
 
 # Add changes to git
