@@ -23,11 +23,11 @@ jobs:
       - name: Check new version
         run: ./.github/scripts/check_new_version.sh
         shell: bash
-        continue-on-error: true
+      #   continue-on-error: ${{ github.event.action == 'closed' }} # Ignore error on closed PR
 
-      - name: Check if failed
-        if: ${{ failure() }}
-        run: exit 1
+      # - name: Check if failed
+      #   if: ${{ failure() }}
+      #   run: exit 1
 
   publish:
     if: github.event.pull_request.merged == true
