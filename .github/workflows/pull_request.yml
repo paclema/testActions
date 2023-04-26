@@ -34,6 +34,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Readme badget
+        run: ./.github/scripts/update_readme_lib_version.sh
+        shell: bash
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -47,7 +53,3 @@ jobs:
         env:
           PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
         run: pio pkg publish --no-interactive
-
-      # - name: Update Readme badget
-      #   run: ./.github/scripts/update_readme_lib_version.sh
-      #   shell: bash
