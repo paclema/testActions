@@ -8,7 +8,7 @@ on:
 jobs:
 
   check-version:
-    name: Check new library version
+    name: Check new library version number
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -37,8 +37,8 @@ jobs:
         with:
           token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
 
-      - name: Update Readme badget
-        run: ./.github/scripts/update_readme_lib_version.sh
+      - name: Update Readme library version
+        run: ./.github/scripts/update_lib_version.sh
         shell: bash
 
       - name: Set up Python

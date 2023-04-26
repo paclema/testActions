@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -x
 package_name=$(jq -r '.name' library.json)
 package_version=$(jq -r '.version' library.json)
 package_owner=$(echo "${GITHUB_REPOSITORY}" | cut -d / -f 1)
@@ -18,3 +19,4 @@ git config --global user.name "Pablo Clemente"
 git add README.md
 git commit -m "Update library to version ${package_version}"
 git push
+set +x
