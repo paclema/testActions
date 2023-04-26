@@ -48,4 +48,6 @@ jobs:
           PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
         run: pio pkg publish --no-interactive
 
-      - name: Update Readme badget
+      # - name: Update Readme badget
+      #   run: ./.github/scripts/update_readme_lib_version.sh
+      #   shell: bash
