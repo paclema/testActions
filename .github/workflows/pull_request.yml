@@ -21,7 +21,7 @@ jobs:
         run: pip install -U platformio
 
       - name: Check new version
-        run: ./check_new_version.sh
+        run: ./.github/scripts/check_new_version.sh
         shell: bash
         continue-on-error: true
 
