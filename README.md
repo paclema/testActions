@@ -3,7 +3,7 @@
 # testActions
 
 [![GitHub Workflow Status Badge](https://img.shields.io/github/actions/workflow/status/paclema/testActions/pull_request.yml?event=pull_request&logo=github)](https://github.com/paclema/testActions/actions/workflows/pull_request.yml?query=workflow%3A%22Pull+Request+CI%22)
-[![PlatformIO Registry](https://badges.registry.platformio.org/packages/paclema/library/testActions.svg?version=1.5.3)](https://registry.platformio.org/libraries/paclema/testActions)
+[![PlatformIO Registry](https://badges.registry.platformio.org/packages/paclema/library/testActions.svg?version=)](https://registry.platformio.org/libraries/paclema/testActions)
 <a href="https://registry.platformio.org/libraries/paclema/testActions"><img src="https://badges.registry.platformio.org/packages/paclema/library/testActions.svg" alt="PlatformIO Registry" /></a>
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
