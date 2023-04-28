@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# To install this hook, save it under .git/hooks folder 
+# and give permissions chmod +x .git/hooks/prepare-commit-msg
+
+# Obtain commit message
+COMMIT_MSG=$1
+
+# Add it into CHANGELOG.md
+if grep -q "HEAD" CHANGELOG.md; then
+    # Remove last line break before latest version and include the commit message
+    awk -v msg="$COMMIT_MSG" 'NR==FNR{if(/^v[0-9]+\.[0-9]+\.[0-9]+/&&!f){n=NR;f=1}next} FNR==n-1{print "* "msg"\n";next} 1' CHANGELOG.md CHANGELOG.md > tmp && mv tmp CHANGELOG.md
+else
+    # If there is not HEAD header, create it befere the new commit mesaje
+    awk -v msg="$COMMIT_MSG" 'NR==FNR{if(/^v[0-9]+\.[0-9]+\.[0-9]+/&&!f){n=NR;f=1}next} FNR==n-1{print "\nHEAD\n----\n\n* "msg"\n";next} 1' CHANGELOG.md CHANGELOG.md > tmp && mv tmp CHANGELOG.md
+fi
+
+# Add CHANGELOG.md file to the commit
+git add CHANGELOG.md
