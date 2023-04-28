@@ -50,13 +50,11 @@ jobs:
           echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
           echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
-      - name: Force new tag fetch
-        run: git fetch --tags --force origin
-
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-         ref: ${{ env.GITHUB_REF }}
+
+      - name: Force new tag fetch
+        run: git fetch --tags --force origin
 
       - name: Write release body
         id: body
@@ -86,13 +84,11 @@ jobs:
     needs: update-lib-files
     runs-on: ubuntu-latest
     steps:
-      - name: Force new tag fetch
-        run: git fetch --tags --force origin
-
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-         ref: ${{ env.GITHUB_REF }}
+
+      - name: Force new tag fetch
+        run: git fetch --tags --force origin
 
       - name: Set up Python
         uses: actions/setup-python@v2
