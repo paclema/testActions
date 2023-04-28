@@ -53,13 +53,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Force new tag fetch
+      - name: Force Fetch new tag
         run: |
+          tag=${GITHUB_REF#refs/tags/}
           git fetch --tags --force origin
-          git status
-
-      - name: Checkout
-        uses: actions/checkout@v3
+          git checkout "${tag}"
 
       - name: Write release body
         id: body
@@ -92,19 +90,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # - name: Force new tag fetch
-      #   run: |
-      #     tag=${GITHUB_REF#refs/tags/}
-      #     echo "${tag}"
-      #     git fetch --tags --force origin
-      #     git status
-      #     git checkout tag
-      #     git status
-
-
-      - name: Checkout
-        uses: actions/checkout@v3
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -118,9 +103,6 @@ jobs:
           PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
         run: |
           tag=${GITHUB_REF#refs/tags/}
-          echo "${tag}"
           git fetch --tags --force origin
-          git status
           git checkout "${tag}"
-          git status
           pio pkg publish --no-interactive
