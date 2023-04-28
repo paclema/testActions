@@ -7,6 +7,7 @@ HEAD
 * Forgot to copy post hook
 * Removed unnecessary file
 * Add more robust compare version
+* Added test change
 
 v1.7.7 (2023-04-28)
 ------
