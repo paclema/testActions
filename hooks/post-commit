@@ -1,13 +1,9 @@
 #!/bin/sh
-COMMIT_MSG_FILE=$1
-COMMIT_SOURCE=$2
-SHA1=$3
-COMMIT_MSG=$(cat $COMMIT_MSG_FILE)
-echo
 if [ -e .commit ]
     then
+    COMMIT_MSG=$(cat .commit)
     rm .commit
-    
+
     echo "Receiving commit message $COMMIT_MSG"
 
     # Add it into CHANGELOG.md
