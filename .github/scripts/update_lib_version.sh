@@ -24,7 +24,8 @@ git fetch
 # git checkout $(git describe --tags --abbrev=0 | cut -d'-' -f1)
 
 # Update library.json version object
-sed '/"version":/ { s/\("version":\) "\(.*\)",/\1 "v2.0.0",/; :a; n; ba; }' library.json > tmp.json && mv tmp.json library.json
+sed "/\"version\":/ { s/\(\"version\":\) \"\(.*\)\",/\1 \"${NEW_VERSION}\",/; :a; n; ba; }" library.json > tmp.json && mv tmp.json library.json
+
 
 # Update CHANGELOG
 DATE=$(date +%F)
@@ -57,9 +58,11 @@ git merge release_v"$NEW_VERSION"
 
 # Update tag on last commit and add info
 CHANGES=$(awk '/\* /{ FOUND=1; print; next } { if (FOUND) exit}' CHANGELOG.md)
-git tag "$TAG" "$TAG"^{} -f -m "$package_name $NEW_VERSION"$'\n'"$CHANGES"
-
-git push --follow-tags
+# git tag "$TAG" "$TAG"^{} -f -m "$package_name $NEW_VERSION"$'\n'"$CHANGES"
+# git push --follow-tags
+git tag -d "$TAG"
+git tag -a "$TAG" -m "$package_name $NEW_VERSION"$'\n'"$CHANGES"
+git push --force origin "$TAG"
 
 
 
