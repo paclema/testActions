@@ -22,67 +22,67 @@
     {
       "name": "ArduinoJson",
       "owner": "bblanchon",
-      "version": "v1.7.6"
+      "version": "^6"
     },
     {
       "name": "AsyncTCP",
       "owner": "me-no-dev",
-      "version": "v1.7.6",
+      "version": "^1.1.1",
       "platforms": "espressif32"
     },
     {
       "name": "ESP Async WebServer",
       "owner": "paclema",
-      "version": "v1.7.6",
+      "version": "https://github.com/paclema/ESPAsyncWebServer.git#namespace-ESPAsyncWebServer",
       "platforms": ["espressif8266", "espressif32"]
     },
     {
       "name": "ESPAsyncTCP",
       "owner": "me-no-dev",
-      "version": "v1.7.6",
+      "version": "^1.2.2",
       "platforms": "espressif8266"
     },
     {
       "name": "ESP8266WebServer",
-      "version": "v1.7.6",
+      "version": "^1.0",
       "platforms": "espressif8266"
     },
     {
       "name": "WebSockets",
       "owner": "Links2004",
-      "version": "v1.7.6",
+      "version": "^2.3.2",
       "platforms": ["espressif8266", "espressif32"]
     },
     {
       "name": "LinkedList",
-      "version": "v1.7.6",
+      "version": "https://github.com/ivanseidel/LinkedList.git#v1.3.2",
       "platforms": "*"
     },
     {
       "name": "SimpleList",
-      "version": "v1.7.6",
+      "version": "https://github.com/spacehuhn/SimpleList",
       "platforms": ["espressif8266", "espressif32"]
     },
     {
       "name": "FTP",
       "owner": "dplasa",
-      "version": "v1.7.6",
+      "version": "https://github.com/dplasa/FTPClientServer",
       "platforms": "*"
     },
     {
       "name": "PubSubClient",
       "owner": "knolleary",
-      "version": "v1.7.6"
+      "version": "^2.8"
     },
     {
       "name": "WebSocketStreamClient",
       "owner": "paclema",
-      "version": "v1.7.6"
+      "version": "https://github.com/paclema/WebSocketStreamClient#development"
     },
     {
       "name": "ArduinoHttpClient",
       "owner": "paclema",
-      "version": "v1.7.6"
+      "version": "https://github.com/paclema/ArduinoHttpClient#development"
     }
   ],
   "platforms": [
