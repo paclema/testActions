@@ -52,7 +52,7 @@ git rebase master   # If the tag is not done under latest master commit, this re
 git checkout master
 git merge release_v"$NEW_VERSION"
 
-# git push
+git push
 # git push origin HEAD:$(git rev-parse --abbrev-ref HEAD)
 
 
