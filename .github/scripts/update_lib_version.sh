@@ -33,7 +33,8 @@ git add README.md CHANGELOG.md library.json
 git commit -m "Update library to ${NEW_VERSION}"
 git status
 
-git push
+# git push
+git push origin HEAD:$(git rev-parse --abbrev-ref HEAD)
 
 # Update tag on last commit and add info
 TAG=$NEW_VERSION
