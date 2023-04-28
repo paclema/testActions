@@ -34,12 +34,15 @@ git commit -m "Update library to ${NEW_VERSION}"
 git status
 
 # git push
-git push origin HEAD:$(git rev-parse --abbrev-ref HEAD)
+# git push origin HEAD:$(git rev-parse --abbrev-ref HEAD)
 
 # Update tag on last commit and add info
 TAG=$NEW_VERSION
 CHANGES=$(awk '/\* /{ FOUND=1; print; next } { if (FOUND) exit}' CHANGELOG.md)
 git tag "$TAG" "$TAG"^{} -f -m "$package_name $NEW_VERSION"$'\n'"$CHANGES"
-git push --follow-tags
+# git push --follow-tags
+
+git push origin HEAD:$(git rev-parse --abbrev-ref HEAD) --follow-tags
+
 
 set +x
