@@ -2,6 +2,11 @@ testActions: change log
 =======================
 
 
+HEAD
+----
+
+* Added pre/post commit hooks
+
 v1.7.7 (2023-04-28)
 ------
 

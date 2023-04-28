@@ -23,6 +23,6 @@ fi
 
 # Add CHANGELOG.md file to the commit
 git add CHANGELOG.md
-git commit -m "$COMMIT_MSG"
+git commit --amend -C HEAD --no-verify
 
-exit 0
+exit
