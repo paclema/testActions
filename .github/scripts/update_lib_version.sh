@@ -2,13 +2,16 @@
 
 set -x
 
+NEW_VERSION=$1
+
 # Change directory to the root of the repository
 cd "$(git rev-parse --show-toplevel)"
 
-NEW_VERSION=$1
+# Checkout to the branch where this tag is comming from:
+git checkout $(git describe --tags --abbrev=0 | cut -d'-' -f1)
 
 # Update library.json
-sed -i "s/\"version\": \".*\"/\"version\": \"$1\"/g" .library.json
+sed -i "s/\"version\": \".*\"/\"version\": \"$1\"/g" library.json
 
 # Update CHANGELOG
 sed -i~ -bE "4s/HEAD/$TAG ($DATE)/; 5s/-+/$UNDERLINE/" CHANGELOG.md
