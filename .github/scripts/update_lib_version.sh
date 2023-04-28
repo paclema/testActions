@@ -12,6 +12,7 @@ sed -i "s/\"version\": \".*\"/\"version\": \"$1\"/g" .library.json
 
 # Update CHANGELOG
 sed -i~ -bE "4s/HEAD/$TAG ($DATE)/; 5s/-+/$UNDERLINE/" CHANGELOG.md
+rm CHANGELOG.md~
 
 # Update PLatformIO badge in README
 package_name=$(jq -r '.name' library.json)
