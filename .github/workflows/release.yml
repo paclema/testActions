@@ -92,10 +92,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Force new tag fetch
-        run: |
-          git fetch --tags --force origin
-          git status
+      # - name: Force new tag fetch
+      #   run: |
+      #     tag=${GITHUB_REF#refs/tags/}
+      #     echo "${tag}"
+      #     git fetch --tags --force origin
+      #     git status
+      #     git checkout tag
+      #     git status
+
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -111,4 +116,11 @@ jobs:
       - name: Publish library
         env:
           PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
-        run: pio pkg publish --no-interactive
+        run: |
+          tag=${GITHUB_REF#refs/tags/}
+          echo "${tag}"
+          git fetch --tags --force origin
+          git status
+          git checkout tag
+          git status
+          pio pkg publish --no-interactive
