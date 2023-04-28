@@ -15,7 +15,7 @@ git config --global user.email "paclema@gmail.com"
 git config --global user.name "Pablo Clemente"
 
 git checkout "$TAG"
-git checkout -b "release_v$TAG"
+git checkout -b "release_v$NEW_VERSION"
 
 git branch -r
 git fetch
@@ -23,10 +23,11 @@ git fetch
 # Checkout to the branch where this tag is comming from:
 # git checkout $(git describe --tags --abbrev=0 | cut -d'-' -f1)
 
-# Update library.json
-sed -i "s/\"version\": \".*\"/\"version\": \"$1\"/g" library.json
+# Update library.json version object
+sed '/"version":/ { s/\("version":\) "\(.*\)",/\1 "v2.0.0",/; :a; n; ba; }' library.json > tmp.json && mv tmp.json library.json
 
 # Update CHANGELOG
+DATE=$(date +%F)
 UNDERLINE=$(printf -- '-%.0s' $(seq 1 ${#TAG}))
 sed -i~ -bE "4s/HEAD/$TAG ($DATE)/; 5s/-+/$UNDERLINE/" CHANGELOG.md
 rm CHANGELOG.md~
@@ -48,7 +49,7 @@ git status
 git rebase master   # If the tag is not done under latest master commit, this rebase could fail
 
 git checkout master
-git merge release_v"$TAG"
+git merge release_v"$NEW_VERSION"
 
 # git push
 # git push origin HEAD:$(git rev-parse --abbrev-ref HEAD)
