@@ -5,6 +5,7 @@ HEAD
 ----
 
 * Forgot to copy post hook
+* Removed unnecessary file
 
 v1.7.7 (2023-04-28)
 ------
