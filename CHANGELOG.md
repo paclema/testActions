@@ -3,6 +3,7 @@ testActions: change log
 
 HEAD
 * fix 3
+* fix 3
 * fix 2
 ----
 
