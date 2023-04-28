@@ -1,8 +1,8 @@
 testActions: change log
 =======================
 
-HEAD
-----
+v2.0.0 (2023-04-28)
+------
 
 * Forgot to copy post hook
 * Removed unnecessary file
