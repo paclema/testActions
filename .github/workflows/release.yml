@@ -6,8 +6,24 @@ on:
       - v*.*.*
 
 jobs:
+
+  check-tag-version:
+    name: Check new library version number
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check latest version
+        id: check-latest-version
+        run: |
+          NEW_VERSION=${GITHUB_REF#refs/*/}
+          LAST_VERSION=$(jq -r '.version' library.json)
+          ./.github/scripts/compare_versions.sh $NEW_VERSION $LAST_VERSION
+
   release:
     name: Create release
+    needs: check-version
     runs-on: ubuntu-20.04
     permissions:
       contents: write
