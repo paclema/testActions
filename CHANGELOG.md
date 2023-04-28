@@ -4,8 +4,7 @@ testActions: change log
 HEAD
 ----
 
-* Try to reduce commit loop to one
-* 
+* Forgot to copy post hook
 
 v1.7.7 (2023-04-28)
 ------
