@@ -2,6 +2,7 @@ testActions: change log
 =======================
 
 HEAD
+* fix 1
 ----
 
 * Test change 1
