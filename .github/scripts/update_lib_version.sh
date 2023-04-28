@@ -24,8 +24,11 @@ sed -i -E "s#${BADGE_REGEX}#${BADGE_REPLACE}#g" README.md
 # Commit file changes to git
 git config --global user.email "paclema@gmail.com"
 git config --global user.name "Pablo Clemente"
+git status
 git add README.md CHANGELOG.md library.json
 git commit -m "Update library to ${NEW_VERSION}"
+git status
+
 git push
 
 # Update tag on last commit and add info
