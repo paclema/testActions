@@ -18,6 +18,6 @@ sed -i -E "s#${BADGE_REGEX}#${BADGE_REPLACE}#g" README.md
 git config --global user.email "paclema@gmail.com"
 git config --global user.name "Pablo Clemente"
 git add README.md
-git commit -m "Update library to version ${package_version}"
+git commit -m "Update library to v${package_version}"
 git push
 set +x
