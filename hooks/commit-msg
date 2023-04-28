@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # To install this hook, save it under .git/hooks folder 
-# and give permissions chmod +x .git/hooks/prepare-commit-msg
+# and give permissions chmod +x .git/hooks/commit-msg
 
 # Obtain commit message
 COMMIT_MSG=$1
