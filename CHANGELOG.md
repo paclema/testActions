@@ -1,7 +1,7 @@
 testActions: change log
 =======================
 
-HEAD
-----
+v1.7.7 ()
+------
 
 * Fix compatibility with the WebConfiog libary (issue #1)
