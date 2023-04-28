@@ -1,8 +1,8 @@
 testActions: change log
 =======================
 
-v1.8.9 (2023-04-28)
--------
+HEAD
+----
 
 * Test change 1
 
