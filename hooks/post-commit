@@ -1,8 +1,24 @@
 #!/bin/sh
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+SHA1=$3
+COMMIT_MSG=$(cat $COMMIT_MSG_FILE)
 echo
 if [ -e .commit ]
     then
     rm .commit
+    
+    echo "Receiving commit message $COMMIT_MSG"
+
+    # Add it into CHANGELOG.md
+    if grep -q "HEAD" CHANGELOG.md; then
+        # Remove last line break before latest version and include the commit message
+        awk -v msg="$COMMIT_MSG" 'NR==FNR{if(/^v[0-9]+\.[0-9]+\.[0-9]+/&&!f){n=NR;f=1}next} FNR==n-1{print "* "msg"\n";next} 1' CHANGELOG.md CHANGELOG.md > tmp && mv tmp CHANGELOG.md
+    else
+        # If there is not HEAD header, create it befere the new commit mesaje
+        awk -v msg="$COMMIT_MSG" 'NR==FNR{if(/^v[0-9]+\.[0-9]+\.[0-9]+/&&!f){n=NR;f=1}next} FNR==n-1{print "\nHEAD\n----\n\n* "msg"\n";next} 1' CHANGELOG.md CHANGELOG.md > tmp && mv tmp CHANGELOG.md
+    fi
+
     git add CHANGELOG.md
     git commit --amend -C HEAD --no-verify
 fi
