@@ -21,9 +21,18 @@ jobs:
           LAST_VERSION=$(jq -r '.version' library.json)
           ./.github/scripts/compare_versions.sh $NEW_VERSION $LAST_VERSION
 
+  update-lib-files:
+    name: Check new lib version number
+    needs: check-tag-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Readme library version
+        run: ./.github/scripts/update_lib_version.sh ${GITHUB_REF#refs/*/}
+        shell: bash
+
   release:
     name: Create release
-    needs: check-tag-version
+    needs: update-lib-files
     runs-on: ubuntu-20.04
     permissions:
       contents: write
@@ -58,3 +67,24 @@ jobs:
           name: testAction ${{ steps.init.outputs.version }}
           artifacts: ${{ steps.arduino.outputs.filename }}
           # token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-platformio:
+    name: Publish library to PlatformIO Registry
+    needs: update-lib-files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install PlatformIO
+        run: pip install -U platformio
+
+      - name: Publish library
+        env:
+          PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
+        run: pio pkg publish --no-interactive

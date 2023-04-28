@@ -38,7 +38,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update Readme library version
-        run: ./.github/scripts/update_lib_version.sh
+        run: ./.github/scripts/update_readme.sh
         shell: bash
 
       - name: Set up Python
