@@ -6,6 +6,14 @@
 # Obtain commit message
 COMMIT_MSG=$1
 
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+SHA1=$3
+
+echo $COMMIT_MSG_FILE
+echo $COMMIT_SOURCE
+echo $SHA1
+
 # Add it into CHANGELOG.md
 if grep -q "HEAD" CHANGELOG.md; then
     # Remove last line break before latest version and include the commit message
@@ -17,3 +25,4 @@ fi
 
 # Add CHANGELOG.md file to the commit
 git add CHANGELOG.md
+git status
