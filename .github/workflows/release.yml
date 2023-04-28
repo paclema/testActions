@@ -22,11 +22,14 @@ jobs:
           ./.github/scripts/compare_versions.sh $NEW_VERSION $LAST_VERSION
 
   update-lib-files:
-    name: Check new lib version number
+    name: Update lib files
     needs: check-tag-version
     runs-on: ubuntu-latest
     steps:
-      - name: Update Readme library version
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Update library version
         run: ./.github/scripts/update_lib_version.sh ${GITHUB_REF#refs/*/}
         shell: bash
 
