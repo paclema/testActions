@@ -8,6 +8,7 @@ HEAD
 * Removed unnecessary file
 * Add more robust compare version
 * Added test change
+* Removed prefix for github ref version
 
 v1.7.7 (2023-04-28)
 ------
