@@ -46,7 +46,9 @@ git tag "$TAG" "$TAG"^{} -f -m "$package_name $NEW_VERSION"$'\n'"$CHANGES"
 
 # git push origin HEAD:$(git rev-parse --abbrev-ref HEAD) --follow-tags
 # git push origin HEAD:$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f5) --follow-tags
-git push origin HEAD:refs/heads/$(git rev-parse --abbrev-ref HEAD) --follow-tags
+# git push origin HEAD:refs/heads/$(git rev-parse --abbrev-ref HEAD) --follow-tags
+
+git checkout release_"$TAG"
 
 
 
