@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Check latest version
-        id: check-latest-version
+        id: checkVersion
         run: |
           NEW_VERSION=${GITHUB_REF#refs/*/}
           LAST_VERSION=$(jq -r '.version' library.json)
