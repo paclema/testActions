@@ -16,6 +16,6 @@ rm -f "$OUTPUT"
 	examples \
 	data \
 	src \
-	LICENSE.txt \
+	LICENSE \
 	CHANGELOG.md \
 	README.md
