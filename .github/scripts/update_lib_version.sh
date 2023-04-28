@@ -2,7 +2,9 @@
 
 set -x
 
-NEW_VERSION=$1
+TAG=$1
+NEW_VERSION=${TAG#v}
+echo "Preparing new library version $NEW_VERSION"
 
 # Change directory to the root of the repository
 cd "$(git rev-parse --show-toplevel)"
@@ -12,9 +14,11 @@ cd "$(git rev-parse --show-toplevel)"
 git config --global user.email "paclema@gmail.com"
 git config --global user.name "Pablo Clemente"
 
-git checkout "$NEW_VERSION"
-git checkout -b "release_$NEW_VERSION"
+git checkout "$TAG"
+git checkout -b "release_v$TAG"
 
+git branch -r
+git fetch
 
 # Checkout to the branch where this tag is comming from:
 # git checkout $(git describe --tags --abbrev=0 | cut -d'-' -f1)
@@ -23,6 +27,7 @@ git checkout -b "release_$NEW_VERSION"
 sed -i "s/\"version\": \".*\"/\"version\": \"$1\"/g" library.json
 
 # Update CHANGELOG
+UNDERLINE=$(printf -- '-%.0s' $(seq 1 ${#TAG}))
 sed -i~ -bE "4s/HEAD/$TAG ($DATE)/; 5s/-+/$UNDERLINE/" CHANGELOG.md
 rm CHANGELOG.md~
 
@@ -37,20 +42,19 @@ sed -i -E "s#${BADGE_REGEX}#${BADGE_REPLACE}#g" README.md
 # Commit file changes to git
 git status
 git add README.md CHANGELOG.md library.json
-git commit -m "Update library to ${NEW_VERSION}"
+git commit -m "Update library to ${TAG}"
 git status
 
 git rebase master   # If the tag is not done under latest master commit, this rebase could fail
 
 git checkout master
-git merge release_"$TAG"
+git merge release_v"$TAG"
 
 # git push
 # git push origin HEAD:$(git rev-parse --abbrev-ref HEAD)
 
 
 # Update tag on last commit and add info
-TAG=$NEW_VERSION
 CHANGES=$(awk '/\* /{ FOUND=1; print; next } { if (FOUND) exit}' CHANGELOG.md)
 git tag "$TAG" "$TAG"^{} -f -m "$package_name $NEW_VERSION"$'\n'"$CHANGES"
 
