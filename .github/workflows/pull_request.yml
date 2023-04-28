@@ -35,7 +35,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update Readme library version
         run: ./.github/scripts/update_lib_version.sh

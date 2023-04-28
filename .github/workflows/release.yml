@@ -42,4 +42,3 @@ jobs:
           name: testAction ${{ steps.init.outputs.version }}
           artifacts: ${{ steps.arduino.outputs.filename }}
           # token: ${{ secrets.GITHUB_TOKEN }}
-          token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
