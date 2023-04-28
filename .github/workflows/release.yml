@@ -22,14 +22,15 @@ jobs:
         id: body
         run: |
           FILENAME=RELEASE.md
-          extras/scripts/get-release-body.sh ${{ steps.init.outputs.tag }} CHANGELOG.md | tee $FILENAME
+          ./.github/scripts/get-release-body.sh ${{ steps.init.outputs.tag }} CHANGELOG.md | tee $FILENAME
           echo "filename=$FILENAME" >> $GITHUB_OUTPUT
 
       - name: Create Arduino package
         id: arduino
         run: |
-          FILENAME=ArduinoJson-${{ steps.init.outputs.tag }}.zip
-          extras/scripts/build-arduino-package.sh . "$FILENAME"
+          REPO_NAME=$(echo "$GITHUB_REPOSITORY" | cut -d/ -f 2)
+          FILENAME="$REPO_NAME"-${{ steps.init.outputs.tag }}.zip
+          ./.github/scripts/build-arduino-package.sh . "$FILENAME"
           echo "filename=$FILENAME" >> $GITHUB_OUTPUT
           
       - name: Create release
