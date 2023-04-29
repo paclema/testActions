@@ -61,7 +61,7 @@ CHANGES=$(awk '/\* /{ FOUND=1; print; next } { if (FOUND) exit}' CHANGELOG.md)
 # git tag "$TAG" "$TAG"^{} -f -m "$package_name $NEW_VERSION"$'\n'"$CHANGES"
 # git push --follow-tags
 git tag -d "$TAG"
-git tag -a "$TAG" -m "$package_name $NEW_VERSION"$'\n'"$CHANGES"
+git tag -a "$TAG" -m "$package_name $TAG"$'\n'"$CHANGES"
 git push --force origin "$TAG"
 
 

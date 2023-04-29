@@ -1,6 +1,11 @@
 testActions: change log
 =======================
 
+HEAD
+----
+
+* Replace tag version name on description
+
 v2.0.4 (2023-04-29)
 ------
 
