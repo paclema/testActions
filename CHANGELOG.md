@@ -10,6 +10,7 @@ HEAD
 * Removed test line on Readme ()
 * Removed test line on Readme
 * Prevent commit hook if not stagged files
+* Updated compare_versions script messages
 
 v2.0.0 (2023-04-28)
 ------

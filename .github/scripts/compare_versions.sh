@@ -12,19 +12,19 @@ function compare_versions {
 
   # Compare the major, minor, and patch components in order
   if [ ${v1_arr[0]} -gt ${v2_arr[0]} ]; then
-    echo "$1 is greater than $2"
+    echo "New version: v$1   -   Latest version: v$2"
   elif [ ${v1_arr[0]} -lt ${v2_arr[0]} ]; then
-    echo "$1 is less than $2"
+    echo "Error: The new version (v$1) is not greater than latest version (v$2)"
     exit 1
   elif [ ${v1_arr[1]:-0} -gt ${v2_arr[1]:-0} ]; then
-    echo "$1 is greater than $2"
+    echo "New version: v$1   -   Latest version: v$2"
   elif [ ${v1_arr[1]:-0} -lt ${v2_arr[1]:-0} ]; then
-    echo "$1 is less than $2"
+    echo "Error: The new version (v$1) is not greater than latest version (v$2)"
     exit 1
   elif [ ${v1_arr[2]:-0} -gt ${v2_arr[2]:-0} ]; then
-    echo "$1 is greater than $2"
+    echo "New version: v$1   -   Latest version: v$2"
   elif [ ${v1_arr[2]:-0} -lt ${v2_arr[2]:-0} ]; then
-    echo "$1 is less than $2"
+    echo "Error: The new version (v$1) is not greater than latest version (v$2)"
     exit 1
   else
     echo "$1 is equal to $2"
