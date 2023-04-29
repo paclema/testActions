@@ -1,8 +1,8 @@
 testActions: change log
 =======================
 
-HEAD
-----
+v2.0.2 (2023-04-29)
+------
 
 * Added missing dependency
 * Fix release body
