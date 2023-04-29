@@ -44,7 +44,7 @@ jobs:
 
   release:
     name: Create release
-    needs: update-lib-files
+    needs: [update-lib-files, check-tag-version]
     runs-on: ubuntu-20.04
     permissions:
       contents: write
@@ -67,6 +67,7 @@ jobs:
       - name: Write release body
         id: body
         run: |
+          echo "Last version: ${{ needs.check-tag-version.outputs.last_version }}"
           FILENAME=RELEASE.md
           ./.github/scripts/get-release-body.sh ${{ steps.init.outputs.tag }} ${{ needs.check-tag-version.outputs.last_version }} CHANGELOG.md | tee $FILENAME
           echo "filename=$FILENAME" >> $GITHUB_OUTPUT

@@ -1,6 +1,11 @@
 testActions: change log
 =======================
 
+HEAD
+----
+
+* Added missing dependency
+
 v2.0.1 (2023-04-29)
 ------
 
