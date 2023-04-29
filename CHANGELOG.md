@@ -6,6 +6,7 @@ HEAD
 
 * Create change log file if its not created within the commit git hook 
 * Fix CHANGELOG2.md typo
+* Prettify changelog
 
 v2.0.5 (2023-04-29)
 ------
