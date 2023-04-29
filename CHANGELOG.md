@@ -5,6 +5,7 @@ HEAD
 ----
 
 * Added missing dependency
+* Fix release body
 
 v2.0.1 (2023-04-29)
 ------

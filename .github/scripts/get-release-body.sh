@@ -3,7 +3,8 @@
 set -eu
 
 TAG="$1"
-LAST_TAG="$2"
+LAST_VERSION="$2"
+LAST_TAG="v$LAST_VERSION"
 CHANGELOG="$3"
 
 REPO_OWNER=$(echo "$GITHUB_REPOSITORY" | cut -d/ -f 1)
