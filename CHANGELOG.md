@@ -6,6 +6,7 @@ HEAD
 
 * test
 * Added last tag in release to be compared in release notes ()
+* Added test line on Readme ()
 
 v2.0.0 (2023-04-28)
 ------
