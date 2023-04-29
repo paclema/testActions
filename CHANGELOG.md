@@ -1,6 +1,11 @@
 testActions: change log
 =======================
 
+HEAD
+----
+
+* Fixed package_name and version for release artifac
+
 v2.0.3 (2023-04-29)
 ------
 

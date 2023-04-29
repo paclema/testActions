@@ -54,9 +54,7 @@ jobs:
         run: |
           echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
           echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
-          echo "package_name=$(jq -r '.name' library.json)" >> $GITHUB_OUTPUT
-          echo "tag=$tag version=$version package_name=$package_name"
-
+          
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -69,9 +67,9 @@ jobs:
       - name: Write release body
         id: body
         run: |
-          echo "New version: ${{ steps.init.outputs.version }} New tag: ${{ steps.init.outputs.tag }}"
+          echo "package_name=$(jq -r '.name' library.json)" >> $GITHUB_OUTPUT
           FILENAME=RELEASE.md
-          ./.github/scripts/get-release-body.sh ${{ steps.init.outputs.version }} ${{ needs.check-tag-version.outputs.last_version }} CHANGELOG.md | tee $FILENAME
+          ./.github/scripts/get-release-body.sh ${{ steps.init.outputs.tag }} ${{ needs.check-tag-version.outputs.last_version }} CHANGELOG.md | tee $FILENAME
           echo "filename=$FILENAME" >> $GITHUB_OUTPUT
 
       - name: Create Arduino package
@@ -86,7 +84,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           bodyFile: ${{ steps.body.outputs.filename }}
-          name: ${{ steps.init.outputs.package_name }} ${{ steps.init.outputs.tag }}
+          name: ${{ steps.body.outputs.package_name }} ${{ steps.init.outputs.tag }}
           artifacts: ${{ steps.arduino.outputs.filename }}
           # token: ${{ secrets.GITHUB_TOKEN }}
 
