@@ -9,6 +9,7 @@ HEAD
 * Added test line on Readme ()
 * Removed test line on Readme ()
 * Removed test line on Readme
+* Prevent commit hook if not stagged files
 
 v2.0.0 (2023-04-28)
 ------

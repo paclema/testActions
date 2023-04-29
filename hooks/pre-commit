@@ -1,4 +1,11 @@
 #!/bin/sh 
-echo 
-touch .commit 
+
+# Check if there are changes in the staging area
+if ! git diff-index --cached --quiet HEAD --; then
+    # Execute additional actions
+    # echo "Changes detected in the staging area. Additional actions executed."
+    touch .commit 
+else
+    echo "No stagged changes detected. Additional actions not executed."
+fi
 exit
