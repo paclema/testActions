@@ -28,10 +28,8 @@ if [ -e .commit ]; then
         # Append commit message to the end if there is not any release yet
         if ! grep -q "^v[0-9]\+\.[0-9]\+\.[0-9]\+" CHANGELOG.md; then
             # If no version headers exist, add commit message to last line
-            COMMIT_MSG="Fix algo chato 2"
-
             echo "* $COMMIT_MSG" >> CHANGELOG.md
-
+            
         else 
             # If HEAD header is written, append the commit message before the last version messages
             if grep -q "HEAD" CHANGELOG.md; then
