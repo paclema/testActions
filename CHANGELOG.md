@@ -1,6 +1,12 @@
 testActions: change log
 =======================
 
+HEAD
+----
+
+* Fix release body
+* fix changelog
+
 v2.0.2 (2023-04-29)
 ------
 
