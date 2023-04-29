@@ -1,8 +1,8 @@
 testActions: change log
 =======================
 
-HEAD
-----
+v2.0.1 (2023-04-29)
+------
 
 * test
 * Added last tag in release to be compared in release notes ()
