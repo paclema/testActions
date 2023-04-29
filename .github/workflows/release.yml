@@ -10,6 +10,9 @@ jobs:
   check-tag-version:
     name: Check new lib version number
     runs-on: ubuntu-latest
+    outputs:
+      new_version: ${{ steps.check-latest-version.outputs.new_version }}
+      last_version: ${{ steps.check-latest-version.outputs.last_version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -19,6 +22,8 @@ jobs:
         run: |
           NEW_VERSION=$(echo "$GITHUB_REF" | sed 's/^refs\/tags\/v//')
           LAST_VERSION=$(jq -r '.version' library.json)
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "last_version=$LAST_VERSION" >> $GITHUB_OUTPUT
           ./.github/scripts/compare_versions.sh $NEW_VERSION $LAST_VERSION
 
   update-lib-files:
@@ -63,7 +68,7 @@ jobs:
         id: body
         run: |
           FILENAME=RELEASE.md
-          ./.github/scripts/get-release-body.sh ${{ steps.init.outputs.tag }} CHANGELOG.md | tee $FILENAME
+          ./.github/scripts/get-release-body.sh ${{ steps.init.outputs.tag }} ${{ needs.check-tag-version.outputs.last_version }} CHANGELOG.md | tee $FILENAME
           echo "filename=$FILENAME" >> $GITHUB_OUTPUT
 
       - name: Create Arduino package
