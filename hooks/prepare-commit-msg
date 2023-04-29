@@ -11,15 +11,39 @@ SHA1=$3
 COMMIT_MSG=$(cat $COMMIT_MSG_FILE)
 
 if [ -e .commit ]; then
-    # Add it into CHANGELOG.md
-    if grep -q "HEAD" CHANGELOG.md; then
-        # Remove last line break before latest version and include the commit message
-        awk -v msg="$COMMIT_MSG" 'NR==FNR{if(/^v[0-9]+\.[0-9]+\.[0-9]+/&&!f){n=NR;f=1}next} FNR==n-1{print "* "msg"\n";next} 1' CHANGELOG.md CHANGELOG.md > tmp && mv tmp CHANGELOG.md
-    else
-        # If there is not HEAD header, create it befere the new commit mesaje
-        awk -v msg="$COMMIT_MSG" 'NR==FNR{if(/^v[0-9]+\.[0-9]+\.[0-9]+/&&!f){n=NR;f=1}next} FNR==n-1{print "\nHEAD\n----\n\n* "msg"\n";next} 1' CHANGELOG.md CHANGELOG.md > tmp && mv tmp CHANGELOG.md
-    fi
 
+    # Create CHANGELOG.md file with if not exists
+    if [ ! -f "CHANGELOG2.md" ]; then
+
+        REPO_NAME=$(basename -s .git `git config --get remote.origin.url`)
+        # REPO_OWNER_NAME=$(git config --get remote.origin.url | sed 's/.*\/\/github.com\///;s/\.git$//' | cut -d'/' -f1)
+        echo "Change log file not found. Creating $REPO_NAME CHANGELOG.md"
+
+        HEADER="$REPO_NAME: change log"
+        DIVIDER=$(printf '=%.0s' $(seq 1 ${#HEADER}))
+
+        echo -e "$HEADER\n$DIVIDER\n\nHEAD\n----\n\n* $COMMIT_MSG" > CHANGELOG2.md
+
+    else 
+        # Append commit message to the end if there is not any release yet
+        if ! grep -q "^v[0-9]\+\.[0-9]\+\.[0-9]\+" CHANGELOG2.md; then
+            # If no version headers exist, add commit message to last line
+            COMMIT_MSG="Fix algo chato 2"
+
+            echo "* $COMMIT_MSG" >> CHANGELOG2.md
+
+        else 
+            # If HEAD header is written, append the commit message before the last version messages
+            if grep -q "HEAD" CHANGELOG2.md; then
+                # Remove last line break before latest version and include the commit message
+                awk -v msg="$COMMIT_MSG" 'NR==FNR{if(/^v[0-9]+\.[0-9]+\.[0-9]+/&&!f){n=NR;f=1}next} FNR==n-1{print "* "msg"\n";next} 1' CHANGELOG2.md CHANGELOG2.md > tmp && mv tmp CHANGELOG2.md
+            else
+                # If there is not HEAD header, create it befere the new commit message
+                awk -v msg="$COMMIT_MSG" 'NR==FNR{if(/^v[0-9]+\.[0-9]+\.[0-9]+/&&!f){n=NR;f=1}next} FNR==n-1{print "\nHEAD\n----\n\n* "msg"\n";next} 1' CHANGELOG2.md CHANGELOG2.md > tmp && mv tmp CHANGELOG2.md
+            fi
+        fi
+
+    fi
 
     # Add CHANGELOG.md file to the commit
     git add CHANGELOG.md
