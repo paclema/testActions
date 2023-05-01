@@ -1,8 +1,8 @@
 testActions: change log
 =======================
 
-HEAD
-----
+v2.0.6 (2023-05-01)
+------
 
 * Create change log file if its not created within the commit git hook 
 * Fix CHANGELOG2.md typo
