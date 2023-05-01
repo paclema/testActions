@@ -8,6 +8,7 @@ HEAD
 * Fix CHANGELOG2.md typo
 * Prettify changelog
 * Removed hardcoded commit msg on changelog
+* Add initial Arduino library.properties config file
 
 v2.0.5 (2023-04-29)
 ------
