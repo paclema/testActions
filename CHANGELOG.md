@@ -1,6 +1,11 @@
 testActions: change log
 =======================
 
+HEAD
+----
+
+* Fix compare_versions.sh script to compare an initial empty library version
+
 v2.0.6 (2023-05-01)
 ------
 
