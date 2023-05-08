@@ -1,8 +1,8 @@
 testActions: change log
 =======================
 
-HEAD
-----
+v2.0.7-rc (2023-05-08)
+---------
 
 * Fix compare_versions.sh script to compare an initial empty library version
 
